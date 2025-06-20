@@ -9,7 +9,7 @@
     "restart": "pm2 restart shagee"
   },
   "dependencies": {
-   "@whiskeysockets/baileys": "github:AxellNetwork/Baileys",
+   "@whiskeysockets/baileys": "@whiskeysockets/baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@adiwajshing/baileys":"5.0.0",
     "cheerio":"1.0.0",

@@ -102,7 +102,7 @@ console.log('connected to whatsapp 😘♥')
                forwardingScore: 1,
                 isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363418311939411@newsletter',
+          newsletterJid: '120363421350428668@newsletter',
           newsletterName: "𝐒𝙷𝙰𝙶𝙴𝙴 𝐌𝙳 ██▌▍▌▍██",
           serverMessageId: 1041,
         }

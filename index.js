@@ -29,7 +29,7 @@ if (!config.SESSION_ID) {
   return console.log('Please add your session to SESSION_ID env !!');
 }
 
-const sessdata = config.SESSION_ID.replace('3KBOT', '');
+const sessdata = config.SESSION_ID.replace('SHAGEE=');
 const filer = File.fromURL(`https://mega.nz/file/${sessdata}`);
 
 filer.download((err, data) => {

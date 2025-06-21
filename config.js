@@ -12,5 +12,4 @@ MODE :process.env.MODE || "public"
 };
 
 
-Chamath
 //mongodb+srv://Chamath:Chamath@cluster0.ptx139b.mongodb.net/

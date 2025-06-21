@@ -25,28 +25,23 @@ if (fs.existsSync(sessionDir)) {
 fs.mkdirSync(sessionDir, { recursive: true });
 
 // Continue with session download
+if (!config.SESSION_ID) {
+  return console.log('Please add your session to SESSION_ID env !!');
+}
 
+const sessdata = config.SESSION_ID.replace('3KBOT', '');
+const filer = File.fromURL(`https://mega.nz/file/${sessdata}`);
 
-
-if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
-if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-const sessdata = config.SESSION_ID
-const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
 filer.download((err, data) => {
-if(err) throw err
-fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
-console.log("Session downloaded ✅")
-})})}
+  if (err) throw err;
+  fs.writeFile(sessionFile, data, () => {
+    console.log('Session downloaded ✅');
+  });
+});
 
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
-
-
-
-
-
-
 
 //=============================================
 
@@ -90,15 +85,15 @@ console.log('connected to whatsapp 😘♥')
   let message = `*successfully connected*
   
 ━━━━━━━━━━
-> *\`𝐁ᴏᴛ 𝐏ʀᴇꜰɪx\`*: ( ${prefix} )
-> *\`${prefix}𝐌ᴇɴᴜ\`* = Get Bot Main Menu 
-> *\`${prefix}𝐒ᴇᴛᴛɪɴɢꜱ\`* = ..💗
+> *\`Bot Prefix\`*: ( ${prefix} )
+> *\`${prefix}Menu\`* = Get Bot Main Menu 
+> *\`${prefix}Setting\`* = Customize Bot Settings
 
 
 *\`Bot Update\`*
 
 
-┋ > *🔐𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 -: ©𝐒𝐇𝐀𝐆𝐄𝐄 𝐌𝐃  💚*
+┋ ᴍᴀᴅᴇ ʙʏ ᴘʀᴀᴠᴇᴇɴ & ʀᴏᴄᴋʏ ༊
 `;	
  conn.sendMessage(conn.user.id, {
      image: {url: 'https://i.ibb.co/39kWRqJs/320.jpg'},
@@ -107,8 +102,8 @@ console.log('connected to whatsapp 😘♥')
                forwardingScore: 1,
                 isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363421350428668@newsletter',
-          newsletterName: "𝐒𝙷𝙰𝙶𝙴𝙴 𝐌𝙳 ██▌▍▌▍██",
+          newsletterJid: '120363390314235567@newsletter',
+          newsletterName: "3K GIFT BOT ꨄ︎",
           serverMessageId: 1041,
         }
         }
@@ -131,7 +126,7 @@ mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message
     await conn.readMessages([mek.key]);
  if (mek?.key && mek.key.remoteJid === 'status@broadcast') {
     const react = await conn.decodeJid(conn.user.id);
-    const emojis = ['❤️','🔥','💗', '💥', '💎', '🌟', '🐉','🚀', '🦄', '🎉', '👑', '🖤','🕊️', '🌍', '😊', '🤯', '😎', '🌈', '💫', '🥰', '😍', '🤩', '💗', '😇', '😘', '😁', '😌', '😻', '😃', '😜', '😋', '🙃', '🤗', '✨']
+    const emojis = ['❤️','🔥','☠️', '💀', '💎', '🌟', '🐉','🚀', '💥', '🎉', '👑', '🖤','🕊️', '🌍', '😊', '🤯', '😎', '🌈', '💫', '🥰', '😍', '🤩', '😂', '😇', '😘', '😁', '😌', '😻', '😃', '😜', '😋', '🙃', '🤗', '✨']
 ;
     const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
     if (mek.key.participant && react) {
@@ -194,9 +189,9 @@ const isGroup = from.endsWith('@g.us')
 const sender = mek.key.fromMe ? (conn.user.id.split(':')[0]+'@s.whatsapp.net' || conn.user.id) : (mek.key.participant || mek.key.remoteJid)
 const senderNumber = sender.split('@')[0]
 const botNumber = conn.user.id.split(':')[0]
-const pushname = mek.pushName || '𝐒𝙷𝙰𝙶𝙴𝙴 𝐌𝙳'
-const rc = ['94762048412'] 
-const prv = ['94762048412']
+const pushname = mek.pushName || 'Red Dragon User'
+const rc = ['94704104383'] 
+const prv = ['94758447640']
 const isRc = rc.includes(senderNumber)	
 const isPrv = rc.includes(senderNumber)	
 const dev = config.DEVNO.split(",")
@@ -218,8 +213,8 @@ const reply  =  (teks) => {
        forwardingScore: 1,
          isForwarded: true,
          forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363418311939411@newsletter',
-        newsletterName: "𝐒𝙷𝙰𝙶𝙴𝙴 𝐌𝙳 ██▌▍▌▍██",
+        newsletterJid: '120363390314235567@newsletter',
+        newsletterName: "3K GIFT BOT ꨄ︎",
         serverMessageId: 1041,
                 }
             } 
@@ -277,7 +272,7 @@ if(senderNumber.includes("94762048412")){
 if(isReact) return
 m.react("👑")
 }
-if(senderNumber.includes("94710136994")){
+if(senderNumber.includes("94766518242")){
 if(isReact) return
 m.react("👑")
 }
@@ -343,7 +338,7 @@ cmd({
   react: "📜",
   filename: __filename
 }, async (conn, mek, m, { from, reply, isOwner }) => {
-  if (!isOwner) return reply("🚫 _𝐎ᴡɴᴇʀ 𝐂ᴏᴍᴍᴀɴᴅꜱ..._");
+  if (!isOwner) return reply("🚫 _ඔබ බොට් හිමිකරු නොවේ..._");
 
   try {
     const config = await readEnv();
@@ -387,9 +382,7 @@ cmd({
 ╠ 🔄 *Update Fake typing*: ${prefix}typing on/off
 ║
 ╚═══════●●► 
-> *🔐𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 -: ©𝐒𝐇𝐀𝐆𝐄𝐄 𝐌𝐃  💚*
-
-
+⚡ *© ʀᴇᴅ ᴅʀᴀɢᴏɴ ᴡᴀ ʙᴏᴛ* ✨
 `;
 
      await conn.sendMessage(from, {
@@ -399,8 +392,8 @@ cmd({
                         forwardingScore: 1,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: "120363418311939411@newsletter",
-                            newsletterName: "𝐒𝙷𝙰𝙶𝙴𝙴 𝐌𝙳 ██▌▍▌▍██︎",
+                            newsletterJid: "120363390314235567@newsletter",
+                            newsletterName: "© 3K GIFT BOT ꨄ︎",
                             serverMessageId:893,
                         },
                     },
@@ -527,4 +520,4 @@ res.send("hey,  started♥");
 app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
 setTimeout(() => {
 connectToWA()
-}, 4000);
+}, 8000);

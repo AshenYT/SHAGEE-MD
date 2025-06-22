@@ -15,25 +15,36 @@ const EnvVar = require('./lib/mongodbenv');
 const { cmd } = require('./command'); 
 const path = require('path');
 //===================SESSION-AUTH============================
-////===================SESSION============================
-if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
-    if (config.SESSION_ID) {
-      const sessdata = config.SESSION_ID.replace("SHAGEE=", "")
-      const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
-      filer.download((err, data) => {
-        if (err) throw err
-        fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
-          console.log("Session Download Completed !")
-        })
-      })
-    }
-  }
-// <<==========PORTS===========>>
+//===================SESSION-AUTH============================
+const sessionDir = path.join(__dirname, 'session');
+const sessionFile = path.join(sessionDir, 'creds.json');
+
+// Always remove and recreate session directory
+if (fs.existsSync(sessionDir)) {
+  fs.rmSync(sessionDir, { recursive: true, force: true });
+}
+fs.mkdirSync(sessionDir, { recursive: true });
+
+// Continue with session download
+if (!config.SESSION_ID) {
+  return console.log('Please add your session to SESSION_ID env !!');
+}
+
+const sessdata = config.SESSION_ID.replace('SHAGEE=', '');
+const filer = File.fromURL(`https://mega.nz/file/${sessdata}`);
+
+filer.download((err, data) => {
+  if (err) throw err;
+  fs.writeFile(sessionFile, data, () => {
+    console.log('Session downloaded ➲➲➲➲ ✅');
+  });
+});
+
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
-//========================================================================
 
+//==================-=-==========
 async function connectToWA() {
 const connectDB = require('./lib/mongodb');
 connectDB();

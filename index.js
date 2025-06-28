@@ -16,27 +16,19 @@ const { cmd } = require('./command');
 const path = require('path');
 //===================SESSION-AUTH============================
 //===================SESSION-AUTH============================
-const sessionDir = path.join(__dirname, 'session');
-const sessionFile = path.join(sessionDir, 'creds.json');
-
-// Always remove and recreate session directory
-if (fs.existsSync(sessionDir)) {
-  fs.rmSync(sessionDir, { recursive: true, force: true });
-}
-fs.mkdirSync(sessionDir, { recursive: true });
-
-// Continue with session download
-if (!config.SESSION_ID) {
-  return console.log('Please add your session to SESSION_ID env !!');
-}
-
-if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-const filer = File.fromURL(`https://mega.nz/file/${sessdata}`);
-
-filer.download((err, data) => {
-  if (err) throw err;
-  fs.writeFile(sessionFile, data, () => {
-    console.log('Session downloaded ➲➲➲➲ ✅');
+//================== SESSION ==================
+if (!fs.existsSync(__dirname + '/session/creds.json')) {
+    if (!config.SESSION_ID) return console.log("Please Add SESSION_ID ➾")
+      const sessdata = config.SESSION_ID.split("SHAGEE-MD=")[1];
+      const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
+      filer.download((err, data) => {
+        if (err) throw err
+        fs.writeFile(__dirname + '/session/creds.json', data, () => {
+          console.log("Session download completed !!")
+        })
+      })
+    
+  }
   });
 });
 
